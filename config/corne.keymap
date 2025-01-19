@@ -10,6 +10,7 @@
 
 #define LEFT_POSITIONS  0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38
 #define RIGHT_POSITIONS 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40 41
+
 /* Key Positions
 ╭────────────────────────╮ ╭────────────────────────╮
 │  0   1   2   3   4   5 │ │  6   7   8   9  10  11 │
@@ -19,47 +20,35 @@
             ╰────────────╯ ╰────────────╯
 */
 
-// Mouse Overrides
-#define ZMK_MOUSE_DEFAULT_MOVE_VAL 2400
-#define ZMK_MOUSE_DEFAULT_SCRL_VAL 40
-
-// Layers
-#define DEFAULT   0
-#define LOWER     1
-#define UPPER     2
+#define HM_TAPPING_TERM 280
+#define HM_TAPPING_TERM_FAST 200
 
 / {
     behaviors {
-        hrml: home_row_mods_left {
+        hml: home_row_mods_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-            flavor = "balanced";
-
-            //require-prior-idle-ms = <125>;
-
-            hold-trigger-key-positions = < RIGHT_POSITIONS >;
-
-            //hold-trigger-on-release; // delay positional check until key release
-
             bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            global-quick-tap;
+            hold-trigger-key-positions = < RIGHT_POSITIONS >;
+            hold-trigger-on-release;
         };
 
-        hrmr: home_row_mods_right {
+        hmr: home_row_mods_right {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-            flavor = "balanced";
-
-            //require-prior-idle-ms = <125>;
-
-            hold-trigger-key-positions = < LEFT_POSITIONS >;
-
-            //hold-trigger-on-release; // delay positional check until key release
-
             bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            global-quick-tap;
+            hold-trigger-key-positions = < LEFT_POSITIONS >;
+            hold-trigger-on-release;
         };
 
         lthp: layer_tap_hold_preferred {
@@ -106,9 +95,9 @@
             display-name = "base";
             bindings = <
 &kp LBKT   &kp Q         &kp W          &kp E         &kp R          &kp T      &kp Y              &kp U                  &kp I         &kp O          &kp P            &kp RBKT
-&kp MINUS  &hrml LALT A  &hrml LCTRL S  &hrml LCMD D  &hrml LSHFT F  &kp G      &kp H              &hrmr RSHFT J          &hrmr RCMD K  &hrmr RCTRL L  &hrmr RALT SEMI  &kp SQT
+&kp MINUS  &hml LALT A   &hml LCTRL S   &hml LCMD D   &hml LSHFT F  &kp G      &kp H               &hmr RSHFT J          &hmr RCMD K    &hmr RCTRL L   &hmr RALT SEMI   &kp SQT
 &kp GRAVE  &kp Z         &kp X          &kp C         &kp V          &kp B      &kp N              &kp M                  &kp COMMA     &kp DOT        &kp FSLH         &kp EQUAL
-                                        &kp ESC       &kp SPACE      &kp TAB    &lthp 1 LG(ENTER)  &lthp 2 LG(BACKSPACE)  &kp DELETE
+                                        &kp ESC       &kp SPACE      &kp TAB    &lthp 1 ENTER      &lthp 2 BACKSPACE  &kp DELETE
             >;
         };
 
